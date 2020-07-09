@@ -71,7 +71,11 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // Create div and set class to 'piece'
   let createDiv = document.createElement("div");
-  createDiv.className = `.piece .p${currPlayer}`;
+  // making sure class assigned correctly
+  createDiv.className = `piece p${currPlayer}`;
+  console.log("checking piece", createDiv, "checking element", document.getElementById(`${y}-${x}`));
+
+  /** TODO: curently all adds to same cell, change to dynamically calculate correct cell */
   // Access cell by its ID and add a piece as a child to that cell
   document.getElementById(`${y}-${x}`).appendChild(createDiv)
 }

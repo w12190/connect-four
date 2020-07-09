@@ -19,11 +19,11 @@
 /* set the color based on player move */
 
 .p1 {
-  color: red;
+  background-color: red;
 }
 
 .p2 {
-  color: blue;
+  background-color: blue;
 }
 
 /* column-top is table row of clickable areas for each column */
