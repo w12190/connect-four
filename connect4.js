@@ -14,17 +14,27 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
-
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  let tempArray = []
+  for(let i = 0; i < WIDTH; i++){
+    tempArray.push(null)
+  }
+  for(let i = 0; i < HEIGHT; i++){
+    board.push([...tempArray])
+  }
+  //console.log(board) //DEBUG
 }
 
+
+//Prompt:
+//This function is missing the first line, that sets the board variable to the HTML board DOM node. Fix this.
+//Add comments to the code that dynamically creates the HTML table.
+
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  let htmlBoard = document.getElementById('board')
 
-  // TODO: add comment for this code
+  // Creates, populates, and attaches the row of buttons above the board & apply on-click listeners
   let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
@@ -36,7 +46,8 @@ function makeHtmlBoard() {
   }
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
+  // Constructs the HTML board out of tr and td elements
+  // Reference: javachain.com/wp-content/uploads/2014/08/html-table.jpg
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
