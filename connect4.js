@@ -73,7 +73,7 @@ function placeInTable(y, x) {
   let createDiv = document.createElement("div");
   // making sure class assigned correctly
   createDiv.className = `piece p${currPlayer}`;
-  console.log("checking piece", createDiv, "checking element", document.getElementById(`${y}-${x}`));
+  //console.log("checking piece", createDiv, "checking element", document.getElementById(`${y}-${x}`));
 
   /** TODO: curently all adds to same cell, change to dynamically calculate correct cell */
   // Access cell by its ID and add a piece as a child to that cell
@@ -86,7 +86,9 @@ function endGame(msg) {
   // TODO: pop up alert message
 }
 
-/** handleClick: handle click of column top to play piece */
+/** handleClick: handle click of column top to play piece
+ * Takes click event
+*/
 
 function handleClick(evt) {
   // get x from ID of clicked cell
@@ -99,7 +101,7 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
+  board[y][x] = currPlayer
   placeInTable(y, x);
 
   // check for win
@@ -108,10 +110,24 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+   //check if there is an available spot
+   let spotAvailable = false
+   console.log(board)
+   for(let i = 0;  i < WIDTH; i++){
+     for(let j = 0; j < HEIGHT; j++){
+         if (!(board[j][i] === 1 || board[j][i] === 2)){
+           spotAvailable = true
+         }
+     }
+   }
+   if (!spotAvailable){
+    endGame("It's a tie guys :(")
+   }
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  currPlayer = (currPlayer === 1) ? 2 : 1
+  
+  console.log(currPlayer)
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -132,7 +148,7 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
+  // Checks all cells to see if a win starts there.
 
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
