@@ -60,38 +60,37 @@ function makeHtmlBoard() {
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
+ // review solution
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  let pointerY = HEIGHT-1;
+  let yLocation = HEIGHT-1;
+
+  // iterate through the column starting from the bottom to find the position of y that contains an empty cell
   for (let i=HEIGHT-1; i >= 0; i--){
-    pointerY = (board[i][x] === 1 || board[i][x] === 2) ? pointerY-1 : pointerY;
-    console.log("i:",i,"pointerY", pointerY);
+    yLocation = (board[i][x] === 1 || board[i][x] === 2) ? yLocation-1 : yLocation;
+  // console.log("i:",i,"yLocation", yLocation);
   }
-  // if (board[pointerY][x] !== null) pointerY--;
-  // console.log("pointerY", pointerY, "board", board[pointerY][x]);
-  pointerY =  (pointerY < 0) ? null : pointerY;
-  return pointerY;
+  // console.log("yLocation", yLocation, "board", board[yLocation][x]);
+  yLocation =  yLocation < 0 ? null : yLocation;
+  return yLocation;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // Create div and set class to 'piece'
-  let createDiv = document.createElement("div");
+  let pieceContainer = document.createElement("div");
   // making sure class assigned correctly
-  createDiv.className = `piece p${currPlayer}`;
-  //console.log("checking piece", createDiv, "checking element", document.getElementById(`${y}-${x}`));
+  pieceContainer.className = `piece p${currPlayer}`;
+  //console.log("checking piece", pieceContainer, "checking element", document.getElementById(`${y}-${x}`));
 
-  /** TODO: curently all adds to same cell, change to dynamically calculate correct cell */
   // Access cell by its ID and add a piece as a child to that cell
-  document.getElementById(`${y}-${x}`).appendChild(createDiv)
+  document.getElementById(`${y}-${x}`).appendChild(pieceContainer)
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg)
+  // set timeout
 }
 
 /** handleClick: handle click of column top to play piece
@@ -121,6 +120,7 @@ function handleClick(evt) {
 
   // check for tie
    //check if there is an available spot
+   // consider .every function to check top
    let spotAvailable = false
    console.log(board)
    for(let i = 0;  i < WIDTH; i++){
