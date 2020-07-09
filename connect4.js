@@ -63,7 +63,15 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  let pointerY = HEIGHT-1;
+  for (let i=HEIGHT-1; i >= 0; i--){
+    pointerY = (board[i][x] === 1 || board[i][x] === 2) ? pointerY-1 : pointerY;
+    console.log("i:",i,"pointerY", pointerY);
+  }
+  // if (board[pointerY][x] !== null) pointerY--;
+  // console.log("pointerY", pointerY, "board", board[pointerY][x]);
+  pointerY =  (pointerY < 0) ? null : pointerY;
+  return pointerY;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -95,6 +103,8 @@ function handleClick(evt) {
   let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
+  // create pointer to keep track of lowest empty cell
+
   let y = findSpotForCol(x);
   if (y === null) {
     return;
