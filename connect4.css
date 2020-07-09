@@ -13,15 +13,16 @@
   width: 80%;
   height: 80%;
   border-radius: 50%;
+  color: white;
 }
 
 /* set the color based on player move */
 
-#p1 {
+.p1 {
   color: red;
 }
 
-#p2 {
+.p2 {
   color: blue;
 }
 
